@@ -1,18 +1,27 @@
 package com.hrms.hrms.business.concretes;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.CandidateService;
+import com.hrms.hrms.core.utilities.results.ErrorDataResult;
+import com.hrms.hrms.core.utilities.results.ErrorResult;
+import com.hrms.hrms.core.utilities.results.Result;
+import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.CandidateDao;
 import com.hrms.hrms.entities.concretes.Candidate;
+ 
+
+
 
 @Service
 public class CandidateManager implements CandidateService{
 	
 	private CandidateDao candidateDao;
+	
 
 	@Autowired
 	public CandidateManager(CandidateDao candidateDao) {
@@ -28,8 +37,20 @@ public class CandidateManager implements CandidateService{
 	}
 
 	@Override
-	public Candidate newCandidate(Candidate newCandidate) {
-		return candidateDao.save(newCandidate);
-	}
+	public Result add(Candidate newCandidate){
+		try {
+			candidateDao.save(newCandidate);
+			return new SuccessResult("Kayıt başarılı.");
+		}
+		catch(Exception e) {
+			return new ErrorResult("Kayıt başarısız.");
+		}
+		
+		
+		
+		}
+		
+		
+	
 
 }

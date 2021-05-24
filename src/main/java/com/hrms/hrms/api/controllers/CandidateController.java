@@ -1,5 +1,6 @@
 package com.hrms.hrms.api.controllers;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.hrms.business.abstracts.CandidateService;
+import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Candidate;
 
 @RestController
@@ -32,8 +34,8 @@ public class CandidateController {
 	
 	@PostMapping("/add")
 	
-	public Candidate newCandidate(@RequestBody Candidate newCandidate) {
-		return candidateService.newCandidate(newCandidate);
+	public Result add(@RequestBody Candidate newCandidate){
+		return candidateService.add(newCandidate);
 	}
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.hrms.business.abstracts.JobPositionService;
+import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.JobPosition;
 
 @RestController
@@ -32,8 +33,8 @@ public class JobPositionController {
 	}
 	
 	@PostMapping("/add")
-	public JobPosition newJobPosition(@RequestBody JobPosition newJobPosition) {
-		return jobPositionService.newJobPosition(newJobPosition);
+	public Result add(@RequestBody JobPosition newJobPosition) {
+		return jobPositionService.add(newJobPosition);
 	}
 	
 	
