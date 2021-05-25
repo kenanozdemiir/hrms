@@ -23,6 +23,7 @@ public class HrmsApplication {
           .select()                                  
           .apis(RequestHandlerSelectors.basePackage("com.hrms.hrms"))                                      
           .build();                                           
-    }
+	}
 
 }
+

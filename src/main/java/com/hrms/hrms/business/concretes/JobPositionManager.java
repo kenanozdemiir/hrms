@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.JobPositionService;
+import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.JobPositionDao;
@@ -32,9 +33,14 @@ public class JobPositionManager implements JobPositionService {
 
 	@Override
 	public Result add(JobPosition newJobPosition) {
+		try{
 		jobPositionsDao.save(newJobPosition);
 		return new SuccessResult("İş pozisyonu başarıyla eklendi:");
-				
+		}	
+		catch(Exception e) {
+			
+				return new ErrorResult("Tekrar eden kayıt");
+		}
 	}
 	
 	
