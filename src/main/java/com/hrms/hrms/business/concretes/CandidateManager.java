@@ -40,22 +40,16 @@ public class CandidateManager implements CandidateService{
 
 	@Override
 	public Result add(Candidate newCandidate){
-		try {
-			if(CandidateCheckHelper.emptyCheck(newCandidate)) {
-			
-			candidateDao.save(newCandidate);
-			
-			return new SuccessResult("Kayıt başarılı.");}
-			else
-				return new ErrorResult("Tüm alanları doldurunuz.");
+		if(!CandidateCheckHelper.emptyCheck(newCandidate)) {
+			return new ErrorResult("Tüm alanları doldurunuz.");
 		}
-		catch(Exception e) {
-			return new ErrorResult("Kullanıcı zaten kayıtlı.");
-		}
-		
-		
-		
-		}
+	candidateDao.save(newCandidate);
+	return new SuccessResult("Kayıt başarılı.");
+
+
+	
+	}
+	
 	
 	
 		
