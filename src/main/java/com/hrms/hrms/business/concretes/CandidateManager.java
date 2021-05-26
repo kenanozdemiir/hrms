@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.CandidateService;
-import com.hrms.hrms.core.utilities.email.EmailService;
+import com.hrms.hrms.core.utilities.check.CandidateCheckHelper;
+
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
@@ -21,7 +22,7 @@ import com.hrms.hrms.entities.concretes.Candidate;
 public class CandidateManager implements CandidateService{
 	
 	private CandidateDao candidateDao;
-	private EmailService emailService;
+	
 	
 
 	@Autowired
@@ -40,13 +41,16 @@ public class CandidateManager implements CandidateService{
 	@Override
 	public Result add(Candidate newCandidate){
 		try {
+			if(CandidateCheckHelper.emptyCheck(newCandidate)) {
 			
 			candidateDao.save(newCandidate);
-			emailService.sendEmail(newCandidate.getMail(), "Doğrulama linkiniz aşağıdadır:");
-			return new SuccessResult();
+			
+			return new SuccessResult("Kayıt başarılı.");}
+			else
+				return new ErrorResult("Tüm alanları doldurunuz.");
 		}
 		catch(Exception e) {
-			return new ErrorResult("Kayıt başarısız.");
+			return new ErrorResult("Kullanıcı zaten kayıtlı.");
 		}
 		
 		

@@ -14,19 +14,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "employer_users")
+@Table(name= "staff_users")
 
-public class Employer extends User {
+public class Staff extends User {
 	
 	
 	
-	@Column(name = "company_name")
-	private String company_name;
+	@Column(name = "name")
+	String name;
 	
 	
-	@Column(name = "web_adress")
-	private String web_adress;
-	
-	@Column(name = "phone")
-	private String phone;
+	@Column(name= "surname")
+	String surname;
 }
