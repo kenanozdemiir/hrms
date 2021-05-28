@@ -1,42 +1,43 @@
 package com.hrms.hrms.entities.concretes;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data 
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name="users")
-@Inheritance(strategy = InheritanceType.JOINED)				//alt sınıflarından data çekildiğinde users sınıfındaki datalarla birlikte gelmesi için.
+@Table(name="verify_code")
 
-public class User {
+
+public class VerificationCode {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	
-	
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="mail")
-	private String mail;
+	@Column(name= "verify_code")
+	private String verifyCode;
 	
-	@Column(name="password")
-	private String password;
+	@Column(name="is_confirmed")
+	private boolean isConfirmed;
 	
-	@Column(name="repeat_password")
-	private String repeatPassword;
+	@Column(name="created_date")
+	private Date createdDate;
+	
+	@Column(name="confirmed_date")
+	private Date confirmedDate;
 
 }

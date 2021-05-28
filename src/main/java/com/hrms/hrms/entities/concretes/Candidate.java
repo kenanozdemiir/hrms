@@ -25,10 +25,10 @@ public class Candidate extends User {
 	private String surname;
 	
 	@Column(name = "identity_number")
-	private String national_identity;
+	private String nationalIdentity;
 	
 	@Column(name = "birth_year")
-	private String birth_year;
+	private String birthYear;
 	
 	@Column(name = "verify")
 	private boolean verify;
