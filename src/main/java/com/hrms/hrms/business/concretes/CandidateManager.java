@@ -57,7 +57,7 @@ public class CandidateManager implements CandidateService{
 			return new ErrorResult("Bu kimlik numarasına sahip kullanıcı zaten mevcut.");
 		if(candidateDao.existsByMail(newCandidate.getMail()))
 			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
-		if(!EmailManager.confirmEmail(newCandidate))
+		if(!EmailManager.confirmCandidateEmail(newCandidate))
 			return new ErrorResult("Bu mail adresi doğrulanmamış");
 		candidateDao.save(newCandidate);
 		return new SuccessResult("Kayıt başarılı.");	

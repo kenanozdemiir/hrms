@@ -4,6 +4,6 @@ import com.hrms.hrms.entities.concretes.Candidate;
 
 public interface EmailService {
 	
-	boolean confirmEmail(Candidate candidate);
+	boolean confirmCandidateEmail(Candidate candidate);
 
 }
