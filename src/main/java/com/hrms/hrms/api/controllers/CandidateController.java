@@ -38,6 +38,12 @@ public class CandidateController {
 		return candidateService.add(newCandidate);
 	}
 	
+//	@PostMapping("/verifyUser")
+//	public Result verifyUser(@RequestBody Candidate newCandidate) {
+//		return candidateService.verifyUser(newCandidate);
+//		
+//	}
+	
 	
 	
 	

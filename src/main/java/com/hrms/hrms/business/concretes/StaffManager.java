@@ -9,17 +9,21 @@ import com.hrms.hrms.business.abstracts.StaffService;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.StaffDao;
+import com.hrms.hrms.dataAccess.abstracts.VerificationCodeDao;
 import com.hrms.hrms.entities.concretes.Staff;
+import com.hrms.hrms.entities.concretes.VerificationCode;
 
 @Service
 public class StaffManager implements StaffService {
 	
 	private StaffDao staffDao;
+	private VerificationCodeDao verificationCodeDao;
 	
 	@Autowired
-	public StaffManager(StaffDao staffDao) {
+	public StaffManager(StaffDao staffDao,VerificationCodeDao verificationCodeDao) {
 		super();
 		this.staffDao = staffDao;
+		this.verificationCodeDao = verificationCodeDao;
 	}
 	
 	public List<Staff> getAll(){
@@ -31,6 +35,16 @@ public class StaffManager implements StaffService {
 		staffDao.save(newStaff);
 		return new SuccessResult("Başarıyla eklendi.");
 	}
+
+	@Override
+	public Result verifyUser(int staffId, int userId) {
+		VerificationCode verificationCode = verificationCodeDao.findByUserId(userId);
+		verificationCode.setConfirmingStaffId(staffId);
+		verificationCode.setStaffConfirmed(true);
+		verificationCodeDao.save(verificationCode);	
+		return new Result(true);
+	}
+	
 	
 
 }

@@ -30,7 +30,6 @@ public class Candidate extends User {
 	@Column(name = "birth_year")
 	private String birthYear;
 	
-	@Column(name = "verify")
-	private boolean verify;
+	
 
 }

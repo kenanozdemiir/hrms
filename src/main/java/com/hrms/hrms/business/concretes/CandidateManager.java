@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.CandidateService;
+import com.hrms.hrms.business.abstracts.VerificationCodeService;
 import com.hrms.hrms.core.abstracts.CandidateCheckHelper;
-import com.hrms.hrms.core.abstracts.EmailService;
 import com.hrms.hrms.core.abstracts.MernisService;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
@@ -23,24 +23,20 @@ import com.hrms.hrms.entities.concretes.Candidate;
 public class CandidateManager implements CandidateService{
 	
 	private CandidateDao candidateDao;
+	private VerificationCodeService verificationCodeService;
 	private MernisService mernisService;
-	private EmailService emailService;
 	private CandidateCheckHelper candidateCheckHelper;
-	
 	
 	
 	
 
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao,MernisService mernisService,EmailService emailService,CandidateCheckHelper candidateCheckHelper) {
+	public CandidateManager(CandidateDao candidateDao,MernisService mernisService,CandidateCheckHelper candidateCheckHelper, VerificationCodeService verificationCodeService) {
 		super();
 		this.candidateDao = candidateDao;
+		this.verificationCodeService = verificationCodeService;
 		this.mernisService = mernisService;
-		this.emailService = emailService;
 		this.candidateCheckHelper = candidateCheckHelper;
-		
-		
-		
 	}
 	
 	@Override
@@ -62,15 +58,24 @@ public class CandidateManager implements CandidateService{
 			return new ErrorResult("Bu kimlik numarasına sahip kullanıcı zaten mevcut.");
 		if(candidateDao.existsByMail(newCandidate.getMail()))
 			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
-		if(!emailService.confirmCandidateEmail(newCandidate))
-			return new ErrorResult("Bu mail adresi doğrulanmamış");
+		
+		
+		
 		candidateDao.save(newCandidate);
+		verificationCodeService.createVerificationCode(newCandidate);
+
 		return new SuccessResult("Kayıt başarılı.");	
 	
 
 
 	
 	}
+
+//	@Override
+//	public Result verifyUser(Candidate newCandidate) {
+//		 
+//		return null;
+//	}
 	
 	
 	

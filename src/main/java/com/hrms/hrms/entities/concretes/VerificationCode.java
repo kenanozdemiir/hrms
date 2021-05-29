@@ -39,5 +39,16 @@ public class VerificationCode {
 	
 	@Column(name="confirmed_date")
 	private Date confirmedDate;
+	
+	@Column(name="user_id")
+	private int userId;
+	
+	@Column(name="is_staff_confirmed")
+	private boolean isStaffConfirmed;
+	
+	@Column(name="confirming_staff_id")
+	private int confirmingStaffId;
+	
+	
 
 }

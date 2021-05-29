@@ -10,5 +10,6 @@ public interface StaffService {
 	List<Staff> getAll();
 	
 	Result add(Staff newStaff);
-
+	
+	Result verifyUser(int staffId, int userId);
 }

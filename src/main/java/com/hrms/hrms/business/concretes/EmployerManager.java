@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.EmployerService;
-import com.hrms.hrms.core.abstracts.EmailService;
+import com.hrms.hrms.business.abstracts.VerificationCodeService;
 import com.hrms.hrms.core.abstracts.EmployerCheckHelper;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
@@ -18,16 +18,15 @@ import com.hrms.hrms.entities.concretes.Employer;
 public class EmployerManager implements EmployerService{
 	
 	private EmployerDao employerDao;
-	private EmailService emailService;
 	private EmployerCheckHelper employerCheckHelper;
-	
+	private VerificationCodeService verificationCodeService;
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao,EmailService emailService,EmployerCheckHelper employerCheckHelper) {
+	public EmployerManager(EmployerDao employerDao,EmployerCheckHelper employerCheckHelper,VerificationCodeService verificationCodeService) {
 		super();
 		this.employerDao = employerDao;
-		this.emailService = emailService;
 		this.employerCheckHelper = employerCheckHelper;
+		this.verificationCodeService = verificationCodeService;
 	}
 	
 	
@@ -41,16 +40,18 @@ public class EmployerManager implements EmployerService{
 	public Result add(Employer newEmployer) {
 		if(employerCheckHelper.isEmpty(newEmployer))
 			return new ErrorResult("Bilgiler boş bırakılamaz.");
+		if(employerDao.existsByMail(newEmployer.getMail()))
+			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
 		if(!employerCheckHelper.isCompany(newEmployer))
 			return new ErrorResult("Bu mail bir şirket hesabına ait değil.");
 		if(employerCheckHelper.isPasswordSame(newEmployer)==false)
 			return new ErrorResult("Şifreler aynı olmalıdır.");
-		if(!emailService.confirmEmployerEmail(newEmployer))
-			return new ErrorResult("Bu mail adresi doğrulanmamış");
-		if(employerDao.existsByMail(newEmployer.getMail()))
-			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
 		
-	this.employerDao.save(newEmployer);
+		
+		
+		
+		employerDao.save(newEmployer);
+		verificationCodeService.createVerificationCode(newEmployer);
 	return new SuccessDataResult<Employer>(this.employerDao.save(newEmployer), "Kayıt başarılı.");
 	}
 

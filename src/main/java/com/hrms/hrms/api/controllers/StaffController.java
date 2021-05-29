@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.hrms.hrms.business.abstracts.StaffService;
 import com.hrms.hrms.core.utilities.results.Result;
@@ -31,9 +32,14 @@ public class StaffController {
 	}
 	
 	@PostMapping("/add")
-	
 	public Result add(@RequestBody Staff newStaff) {
 		return staffService.add(newStaff);
 	}
+	
+	@PostMapping("/verifyUser")
+	public Result verifyUser(@RequestParam(name="staff_id") int staffId, @RequestParam(name="user_id") int userId) {
+		return staffService.verifyUser(staffId, userId);
+	}
+	
 
 }
