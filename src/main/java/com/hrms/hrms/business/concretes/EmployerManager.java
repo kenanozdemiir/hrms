@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.EmployerService;
-import com.hrms.hrms.core.concretes.EmailManager;
-import com.hrms.hrms.core.utilities.check.EmployerCheckHelper;
+import com.hrms.hrms.core.abstracts.EmailService;
+import com.hrms.hrms.core.abstracts.EmployerCheckHelper;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
@@ -18,12 +18,16 @@ import com.hrms.hrms.entities.concretes.Employer;
 public class EmployerManager implements EmployerService{
 	
 	private EmployerDao employerDao;
+	private EmailService emailService;
+	private EmployerCheckHelper employerCheckHelper;
 	
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao) {
+	public EmployerManager(EmployerDao employerDao,EmailService emailService,EmployerCheckHelper employerCheckHelper) {
 		super();
 		this.employerDao = employerDao;
+		this.emailService = emailService;
+		this.employerCheckHelper = employerCheckHelper;
 	}
 	
 	
@@ -35,13 +39,13 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public Result add(Employer newEmployer) {
-		if(EmployerCheckHelper.isEmpty(newEmployer))
+		if(employerCheckHelper.isEmpty(newEmployer))
 			return new ErrorResult("Bilgiler boş bırakılamaz.");
-		if(!EmployerCheckHelper.isCompany(newEmployer))
+		if(!employerCheckHelper.isCompany(newEmployer))
 			return new ErrorResult("Bu mail bir şirket hesabına ait değil.");
-		if(EmployerCheckHelper.isPasswordSame(newEmployer)==false)
+		if(employerCheckHelper.isPasswordSame(newEmployer)==false)
 			return new ErrorResult("Şifreler aynı olmalıdır.");
-		if(!EmailManager.confirmEmployerEmail(newEmployer))
+		if(!emailService.confirmEmployerEmail(newEmployer))
 			return new ErrorResult("Bu mail adresi doğrulanmamış");
 		if(employerDao.existsByMail(newEmployer.getMail()))
 			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");

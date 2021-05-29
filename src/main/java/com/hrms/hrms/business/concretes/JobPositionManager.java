@@ -9,7 +9,6 @@ import com.hrms.hrms.business.abstracts.JobPositionService;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
-import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.JobPositionDao;
 import com.hrms.hrms.entities.concretes.JobPosition;
 

@@ -1,14 +1,16 @@
 package com.hrms.hrms.core.concretes;
 
+import org.springframework.stereotype.Service;
 
-
+import com.hrms.hrms.core.abstracts.EmailService;
 import com.hrms.hrms.entities.concretes.Candidate;
 import com.hrms.hrms.entities.concretes.Employer;
 
-public class EmailManager {
+@Service
+public class EmailManager implements EmailService {
 
 	
-	public static boolean confirmCandidateEmail(Candidate candidate) {
+	public boolean confirmCandidateEmail(Candidate candidate) {
 		if(candidate.isVerify()==true)
 			return true;
 		else
@@ -16,7 +18,7 @@ public class EmailManager {
 		
 	}
 	
-	public static boolean confirmEmployerEmail(Employer employer) {
+	public boolean confirmEmployerEmail(Employer employer) {
 		if(employer.isVerify()==true)
 			return true;
 		else

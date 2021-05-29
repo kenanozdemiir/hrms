@@ -1,10 +1,14 @@
-package com.hrms.hrms.core.utilities.check;
+package com.hrms.hrms.core.concretes;
 
+import org.springframework.stereotype.Service;
+
+import com.hrms.hrms.core.abstracts.CandidateCheckHelper;
 import com.hrms.hrms.entities.concretes.Candidate;
 
-public class CandidateCheckHelper {
+@Service
+public class CandidateCheckManager implements CandidateCheckHelper{
 	
-	public static boolean isCandidateEmpty(Candidate candidate) {
+	public boolean isCandidateEmpty(Candidate candidate) {
 		if(candidate.getName().isEmpty()|| candidate.getBirthYear().isEmpty()
 			|| candidate.getBirthYear().isEmpty() || candidate.getMail().isEmpty()
 			|| candidate.getSurname().isEmpty() || candidate.getPassword().isEmpty())
@@ -14,7 +18,7 @@ public class CandidateCheckHelper {
 		
 	}
 	
-	public static boolean isPasswordSame(Candidate candidate) {
+	public boolean isPasswordSame(Candidate candidate) {
 		
 		if(candidate.getPassword().equals(candidate.getRepeatPassword())) 
 			return true;

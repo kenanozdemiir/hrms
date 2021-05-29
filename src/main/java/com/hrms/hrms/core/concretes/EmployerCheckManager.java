@@ -1,11 +1,13 @@
-package com.hrms.hrms.core.utilities.check;
+package com.hrms.hrms.core.concretes;
+import org.springframework.stereotype.Service;
 
-import com.hrms.hrms.entities.concretes.Candidate;
+import com.hrms.hrms.core.abstracts.EmployerCheckHelper;
 import com.hrms.hrms.entities.concretes.Employer;
 
-public class EmployerCheckHelper {
+@Service
+public class EmployerCheckManager implements EmployerCheckHelper{
 	
-	public static boolean isEmpty(Employer employer) {
+	public boolean isEmpty(Employer employer) {
 		if(employer.getCompany_name().isEmpty()||
 				employer.getMail().isEmpty()||
 				employer.getWeb_adress().isEmpty()||
@@ -16,14 +18,14 @@ public class EmployerCheckHelper {
 			return false;
 	}
 	
-	public static boolean isCompany(Employer employer) {
+	public boolean isCompany(Employer employer) {
 		if(employer.getMail().contains(employer.getCompany_name()))
 			return true;
 		else 
 			return false;
 	}
 	
-	public static boolean isPasswordSame(Employer employer) {
+	public boolean isPasswordSame(Employer employer) {
 		
 		if(employer.getPassword().equals(employer.getRepeatPassword())) 
 			return true;
