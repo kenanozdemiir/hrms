@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.hrms.business.abstracts.JobAdvertisementService;
+import com.hrms.hrms.core.response.Response;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.JobAdvertisement;
 
@@ -25,7 +26,7 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getall")
-	public List<JobAdvertisement> getAll(){
+	public List<Response> getAll(){
 		return jobAdvertisementService.getAll();
 	}
 	
@@ -37,12 +38,12 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getAllByDateAsc")
-	public List<JobAdvertisement> getAllByDateAsc(){
+	public List<Response> getAllByDateAsc(){
 		return jobAdvertisementService.getAllByDateAsc();
 	}
 	
 	@GetMapping("/getByCompanyName")
-	public List<JobAdvertisement> getByCompanyName(@RequestParam (name="Company Name") String companyName){
+	public List<Response> getByCompanyName(@RequestParam (name="Company Name") String companyName){
 		
 		return jobAdvertisementService.getByCompanyName(companyName);
 	}

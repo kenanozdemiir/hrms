@@ -1,5 +1,6 @@
 package com.hrms.hrms.business.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.JobAdvertisementService;
+import com.hrms.hrms.core.response.Response;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
@@ -27,9 +29,19 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public List<JobAdvertisement> getAll() {
-		
-		return this.jobAdvertisementDao.getByActive();
+	public List<Response> getAll() {
+		List<JobAdvertisement> listJobAd = this.jobAdvertisementDao.getByActive();
+		List<Response> listResponse = new ArrayList<Response>();
+		for(JobAdvertisement jobAds:listJobAd) {
+			Response response = new Response();
+			response.setCompanyName(jobAds.getEmployer().getCompany_name());
+			response.setJobPosition(jobAds.getJobPosition().getPosition());
+			response.setQuato(jobAds.getQuato());
+			response.setStartingDate(jobAds.getStartingDate());
+			response.setEndDate(jobAds.getEndDate());
+			listResponse.add(response);
+			}
+		return listResponse;
 	}
 
 	@Override
@@ -39,16 +51,38 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public List<JobAdvertisement> getAllByDateAsc() {
+	public List<Response> getAllByDateAsc() {
 		Sort sort = Sort.by(Sort.Direction.ASC,"startingDate");
-		return this.jobAdvertisementDao.findAll(sort);
+		List<JobAdvertisement> listJobAd = this.jobAdvertisementDao.findAll(sort);
+		List<Response> listResponse = new ArrayList<Response>();
+		for(JobAdvertisement jobAds:listJobAd) {
+			Response response = new Response();
+			response.setCompanyName(jobAds.getEmployer().getCompany_name());
+			response.setJobPosition(jobAds.getJobPosition().getPosition());
+			response.setQuato(jobAds.getQuato());
+			response.setStartingDate(jobAds.getStartingDate());
+			response.setEndDate(jobAds.getEndDate());
+			listResponse.add(response);
+			}
+		return listResponse;
+		
+		
 	}
 
 	@Override
-	public List<JobAdvertisement> getByCompanyName(String companyName) {
-
-		return this.jobAdvertisementDao.getByCompanyName(companyName);
-		
+	public List<Response> getByCompanyName(String companyName) {
+		List<JobAdvertisement> listJobAd = this.jobAdvertisementDao.getByCompanyName(companyName);
+		List<Response> listResponse = new ArrayList<Response>();
+		for(JobAdvertisement jobAds:listJobAd) {
+			Response response = new Response();
+			response.setCompanyName(jobAds.getEmployer().getCompany_name());
+			response.setJobPosition(jobAds.getJobPosition().getPosition());
+			response.setQuato(jobAds.getQuato());
+			response.setStartingDate(jobAds.getStartingDate());
+			response.setEndDate(jobAds.getEndDate());
+			listResponse.add(response);
+			}
+		return listResponse;
 	}
 
 	@Override
