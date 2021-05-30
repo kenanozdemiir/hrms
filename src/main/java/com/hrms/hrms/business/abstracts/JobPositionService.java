@@ -9,6 +9,6 @@ public interface JobPositionService {
 	
 	List<JobPosition> getAll();
 	
-	Result add(JobPosition newJobPosition);
+	Result add(String positionName);
 
 }

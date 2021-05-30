@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -11,32 +14,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper=false)
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "employer_users")
+@Table(name="cities")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
-
-public class Employer extends User {
+public class City {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
+	@Column(name="id")
+	private int id;
 	
+	@Column(name="name")
+	private String name;
 	
-	@Column(name = "company_name")
-	private String company_name;
-	
-	@Column(name = "web_adress")
-	private String web_adress;
-	
-	@Column(name = "phone")
-	private String phone;
-	
-	@OneToMany(mappedBy= "employer")
+	@OneToMany(mappedBy= "city")
 	private List<JobAdvertisement> jobAdvertisements;
-	
-	
 }

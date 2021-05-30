@@ -32,11 +32,12 @@ public class JobPositionManager implements JobPositionService {
 	}
 
 	@Override
-	public Result add(JobPosition newJobPosition) {
-		if(this.jobPositionsDao.existsByPosition(newJobPosition.getPosition()))
+	public Result add(String positionName) {
+		if(this.jobPositionsDao.existsByPosition(positionName))
 			return new ErrorResult("Bu pozisyon sistemde kayıtlı.");
 		
-		
+		JobPosition newJobPosition = new JobPosition();
+		newJobPosition.setPosition(positionName);
 		return new SuccessDataResult<JobPosition>(this.jobPositionsDao.save(newJobPosition), "Başarıyla eklendi.");
 	}
 	
