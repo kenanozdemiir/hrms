@@ -1,6 +1,7 @@
 package com.hrms.hrms.entities.dtos;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,8 +16,8 @@ public class JobAdvertisementsDto {
 	private String companyName;
 	private String jobPosition;
 	private int quato;
-	private Date startingDate;
-	private Date endDate;
+	private LocalDateTime startingDate;
+	private LocalDateTime endDate;
 	
 	
 

@@ -1,6 +1,7 @@
 package com.hrms.hrms.entities.concretes;
 
-import java.sql.Date;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,10 +36,10 @@ public class VerificationCode {
 	private boolean isConfirmed;
 	
 	@Column(name="created_date")
-	private Date createdDate;
+	private LocalDateTime createdDate;
 	
 	@Column(name="confirmed_date")
-	private Date confirmedDate;
+	private LocalDateTime confirmedDate;
 	
 	@Column(name="user_id")
 	private int userId;

@@ -3,7 +3,8 @@ package com.hrms.hrms.entities.concretes;
 
 
 
-import java.util.Date;
+
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +37,10 @@ public class JobAdvertisement {
 	private String description;
 	
 	@Column(name="starting_date")
-	private Date startingDate;
+	private LocalDateTime startingDate;
 	
 	@Column(name="end_date")
-	private Date endDate;
+	private LocalDateTime endDate;
 	
 	@Column(name="max_salary")
 	private int maxSalary;
