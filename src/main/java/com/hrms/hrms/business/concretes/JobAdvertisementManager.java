@@ -1,60 +1,49 @@
 package com.hrms.hrms.business.concretes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.JobAdvertisementService;
-import com.hrms.hrms.core.response.Response;
+import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.hrms.hrms.entities.concretes.JobAdvertisement;
+import com.hrms.hrms.entities.dtos.JobAdvertisementsDto;
 
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService{
 	
 	private JobAdvertisementDao jobAdvertisementDao;
-	private Response responser;
 	
 	@Autowired
-	public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao,Response responser) {
-		this.jobAdvertisementDao = jobAdvertisementDao;
-		this.responser=responser;
-		
+	public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao) {
+		this.jobAdvertisementDao = jobAdvertisementDao;	
 	}
 
 	@Override
-	public List<Response> getAll() {
-		List<JobAdvertisement> listJobAd = this.jobAdvertisementDao.getByActive();
-		return responser.match(listJobAd);
+	public List<JobAdvertisementsDto> getAll() {
+		return this.jobAdvertisementDao.getByActive();
 	}
 
 	@Override
-	public Result add(JobAdvertisement newJobAdvertisement) {
-		
+	public Result add(JobAdvertisement newJobAdvertisement) {	
 		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.save(newJobAdvertisement), "Başarıyla kaydedildi.");
 	}
 
 	@Override
-	public List<Response> getAllByDateAsc() {
-		Sort sort = Sort.by(Sort.Direction.ASC,"startingDate");
-		List<JobAdvertisement> listJobAd = this.jobAdvertisementDao.findAll(sort);
-		return responser.match(listJobAd);
-		
-		
+	public DataResult<List<JobAdvertisementsDto>> findAllByOrderByStartingDateAsc() {
+		return new SuccessDataResult<List<JobAdvertisementsDto>>(this.jobAdvertisementDao.findAllByOrderByStartingDateAsc(),"Tarihe göre artan şekilde sıralandı.") ;	
 	}
 
 	@Override
-	public List<Response> getByCompanyName(String companyName) {
-		List<JobAdvertisement> listJobAd = this.jobAdvertisementDao.getByCompanyName(companyName);
-		return responser.match(listJobAd);
+	public List<JobAdvertisementsDto> getByCompanyName(String companyName) {
+		return this.jobAdvertisementDao.getByCompanyNamewithDto(companyName);
 	}
 
 	@Override
@@ -63,17 +52,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		JobAdvertisement jbRecor = this.jobAdvertisementDao.findById(id);
 		jbRecor.setStatus(false);
 		this.jobAdvertisementDao.save(jbRecor);
-		return new SuccessResult("İlan kapatıldı.");
+			return new SuccessResult("İlan kapatıldı.");
 		}
 		else
-			return new ErrorResult("Böyle bir employer yok.");
-		
-		
-		
-	}
-	
-	
-		
-	
-	
+			return new ErrorResult("Böyle bir employer yok.");	
+	}	
 }

@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.hrms.business.abstracts.JobAdvertisementService;
-import com.hrms.hrms.core.response.Response;
+import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.JobAdvertisement;
+import com.hrms.hrms.entities.dtos.JobAdvertisementsDto;
 
 @RestController
 @RequestMapping("/api/JobAdvertisement")
@@ -26,24 +27,22 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getall")
-	public List<Response> getAll(){
+	public List<JobAdvertisementsDto> getAll(){
 		return jobAdvertisementService.getAll();
 	}
 	
 	@PostMapping("/add")
-	
 	public Result add(@RequestBody JobAdvertisement newJobAdvertisement) {
-		
 		return jobAdvertisementService.add(newJobAdvertisement);
 	}
 	
-	@GetMapping("/getAllByDateAsc")
-	public List<Response> getAllByDateAsc(){
-		return jobAdvertisementService.getAllByDateAsc();
+	@GetMapping("/findAllByOrderByStartingDateAsc")
+	public DataResult<List<JobAdvertisementsDto>> findAllByOrderByStartingDateAsc(){
+		return jobAdvertisementService.findAllByOrderByStartingDateAsc();
 	}
 	
 	@GetMapping("/getByCompanyName")
-	public List<Response> getByCompanyName(@RequestParam (name="Company Name") String companyName){
+	public List<JobAdvertisementsDto> getByCompanyName(@RequestParam (name="Şirket İsmi") String companyName){
 		
 		return jobAdvertisementService.getByCompanyName(companyName);
 	}
@@ -51,12 +50,6 @@ public class JobAdvertisementController {
 	@PostMapping("/closeAd")
 	
 	public Result closeAd(@RequestParam(name="Kapatılacak olan ilan no") int id,@RequestParam(name="Kapatacak olan Employer no") int employerId) {
-		
 		return jobAdvertisementService.closeAd(id,employerId);
-	}
-	
-	
-	
-	
-	
+	}	
 }

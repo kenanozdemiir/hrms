@@ -54,7 +54,7 @@ public class EmployerManager implements EmployerService{
 		newEmployer.setMail(mail);
 		newEmployer.setPassword(password);
 		newEmployer.setRepeatPassword(repeatPassword);
-		newEmployer.setCompany_name(companyName);
+		newEmployer.setCompanyName(companyName);
 		newEmployer.setWeb_adress(webAdress);
 		newEmployer.setPhone(phone);
 		
