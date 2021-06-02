@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +29,7 @@ public class Language {
 	@Column(name="id")
 	private int id;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(targetEntity = Cv.class)
 	@JoinColumn(name="cv_id")
 	private Cv cv;

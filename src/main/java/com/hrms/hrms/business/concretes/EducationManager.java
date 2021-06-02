@@ -33,4 +33,9 @@ public class EducationManager implements EducationService {
 		return new SuccessDataResult<List<Education>>(educationDao.findAll(), "Başarıyla listelendi.");
 	}
 
+	@Override
+	public List<Education> findAllByOrderByEndDateDesc() {
+		return this.educationDao.findAllByOrderByEndDateDesc();
+	}
+
 }

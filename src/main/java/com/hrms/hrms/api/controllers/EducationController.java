@@ -36,5 +36,10 @@ public class EducationController {
 		
 	}
 	
+	@GetMapping("findAllByOrderByEndDateDesc")
+	public List<Education> findAllByOrderByEndDateDesc(){
+		return this.educationService.findAllByOrderByEndDateDesc();
+	}
+	
 	
 }

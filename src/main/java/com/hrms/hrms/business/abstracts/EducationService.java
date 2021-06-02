@@ -9,4 +9,5 @@ import com.hrms.hrms.entities.concretes.Education;
 public interface EducationService {
 	Result add(Education newEducation);
 	DataResult<List<Education>> getAll();
+	List<Education> findAllByOrderByEndDateDesc();
 }
