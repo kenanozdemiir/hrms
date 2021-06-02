@@ -14,6 +14,7 @@ import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.CandidateDao;
+import com.hrms.hrms.dataAccess.abstracts.CvDao;
 import com.hrms.hrms.entities.concretes.Candidate;
  
 
@@ -28,10 +29,9 @@ public class CandidateManager implements CandidateService{
 	private CandidateCheckHelper candidateCheckHelper;
 	
 	
-	
 
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao,MernisService mernisService,CandidateCheckHelper candidateCheckHelper, VerificationCodeService verificationCodeService) {
+	public CandidateManager(CandidateDao candidateDao,MernisService mernisService,CandidateCheckHelper candidateCheckHelper, VerificationCodeService verificationCodeService,CvDao cvDao) {
 		super();
 		this.candidateDao = candidateDao;
 		this.verificationCodeService = verificationCodeService;
@@ -65,17 +65,9 @@ public class CandidateManager implements CandidateService{
 		verificationCodeService.createVerificationCode(newCandidate);
 
 		return new SuccessResult("Kayıt başarılı.");	
-	
-
-
-	
 	}
 
-//	@Override
-//	public Result verifyUser(Candidate newCandidate) {
-//		 
-//		return null;
-//	}
+	
 	
 	
 	

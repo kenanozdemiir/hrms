@@ -39,7 +39,7 @@ public class CandidateController {
 		this.candidateService = candidateService;
 	}
 	
-	@GetMapping("/getall")
+	@GetMapping("/getAll")
 	public List<Candidate> getAll(){
 		return candidateService.getAll();
 	}
@@ -49,6 +49,8 @@ public class CandidateController {
 	public ResponseEntity<?> add(@Valid @RequestBody Candidate newCandidate){
 		return ResponseEntity.ok(this.candidateService.add(newCandidate));
 	}
+	
+	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -11,7 +11,5 @@ public interface CandidateService {
 	List<Candidate> getAll();
 	
 	Result add(Candidate newCandidate) ;
-	
-//	Result verifyUser(Candidate newCandidate);
 
 }
