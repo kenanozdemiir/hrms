@@ -13,7 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,7 @@ public class Cv {
 	@Column(name="id")
 	private int id;
 	
-	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(targetEntity = Candidate.class)
 	@JoinColumn(name="candidate_id",referencedColumnName = "id", nullable = false)
 	private Candidate candidate;														//candidate_id kısmını unique yapıp 

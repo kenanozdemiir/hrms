@@ -1,10 +1,16 @@
 package com.hrms.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +38,7 @@ public class Candidate extends User {
 	@Column(name = "birth_year")
 	private String birthYear;
 	
+
+	@OneToMany(mappedBy="candidate")
+	private List<Cv> cvs;
 }
