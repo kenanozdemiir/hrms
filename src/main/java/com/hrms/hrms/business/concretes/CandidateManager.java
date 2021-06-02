@@ -16,6 +16,7 @@ import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.CandidateDao;
 import com.hrms.hrms.dataAccess.abstracts.CvDao;
 import com.hrms.hrms.entities.concretes.Candidate;
+import com.hrms.hrms.entities.dtos.CandidateCvDto;
  
 
 
@@ -59,12 +60,15 @@ public class CandidateManager implements CandidateService{
 		if(candidateDao.existsByMail(newCandidate.getMail()))
 			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
 		
-		
-		
+	
 		candidateDao.save(newCandidate);
 		verificationCodeService.createVerificationCode(newCandidate);
 
 		return new SuccessResult("Kayıt başarılı.");	
+	}
+	
+	public CandidateCvDto getCandidateCvAllById(int id){
+		return this.candidateDao.getCandidateCvAllById(id);
 	}
 
 	

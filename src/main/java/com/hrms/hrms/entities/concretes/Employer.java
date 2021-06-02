@@ -24,8 +24,6 @@ import lombok.NoArgsConstructor;
 
 public class Employer extends User {
 	
-	
-	
 	@Column(name = "company_name")
 	private String companyName;
 	
@@ -37,6 +35,4 @@ public class Employer extends User {
 	
 	@OneToMany(mappedBy= "employer")
 	private List<JobAdvertisement> jobAdvertisements;
-	
-	
 }

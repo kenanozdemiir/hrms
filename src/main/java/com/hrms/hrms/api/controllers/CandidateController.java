@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hrms.hrms.business.abstracts.CandidateService;
 import com.hrms.hrms.core.utilities.results.ErrorDataResult;
 import com.hrms.hrms.entities.concretes.Candidate;
+import com.hrms.hrms.entities.dtos.CandidateCvDto;
 
 
 
@@ -48,6 +49,11 @@ public class CandidateController {
 	
 	public ResponseEntity<?> add(@Valid @RequestBody Candidate newCandidate){
 		return ResponseEntity.ok(this.candidateService.add(newCandidate));
+	}
+	
+	@GetMapping("/getCandidateCvAll")
+	public CandidateCvDto getCandidateCvAllById(int id){
+		return this.candidateService.getCandidateCvAllById(id);
 	}
 	
 	
