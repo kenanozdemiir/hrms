@@ -37,26 +37,14 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
-	public Result add(String mail,String password,
-		    String repeatPassword,String companyName,
-		    String webAdress,String phone) {
-		if(checkHelper.isEmpty(mail,password,repeatPassword,companyName,webAdress,phone))
-			return new ErrorResult("Bilgiler boş bırakılamaz.");
-		if(employerDao.existsByMail(mail))
-			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
-		if(!checkHelper.isCompany(mail,companyName))
-			return new ErrorResult("Bu mail bir şirket hesabına ait değil.");
-		if(checkHelper.isPasswordSame(password,repeatPassword)==false)
-			return new ErrorResult("Şifreler aynı olmalıdır.");
+	public Result add(Employer newEmployer) {
 		
-
-		Employer newEmployer = new Employer();		
-		newEmployer.setMail(mail);
-		newEmployer.setPassword(password);
-		newEmployer.setRepeatPassword(repeatPassword);
-		newEmployer.setCompanyName(companyName);
-		newEmployer.setWeb_adress(webAdress);
-		newEmployer.setPhone(phone);
+		if(employerDao.existsByMail(newEmployer.getMail()))
+			return new ErrorResult("Bu mail sistemde zaten kayıtlı.");
+		if(!checkHelper.isCompany(newEmployer.getMail(),newEmployer.getCompanyName()))
+			return new ErrorResult("Bu mail bir şirket hesabına ait değil.");
+		if(checkHelper.isPasswordSame(newEmployer.getPassword(),newEmployer.getRepeatPassword())==false)
+			return new ErrorResult("Şifreler aynı olmalıdır.");
 		
 		
 		employerDao.save(newEmployer);

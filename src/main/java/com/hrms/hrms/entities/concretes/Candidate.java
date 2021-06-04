@@ -33,6 +33,7 @@ public class Candidate extends User {
 	@Column(name = "birth_year")
 	private String birthYear;
 	
+	
 	@OneToMany(mappedBy="candidate")
-	private List<Cv> cvs;
+	private List<Cv> cv;
 }

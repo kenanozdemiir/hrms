@@ -9,8 +9,6 @@ public interface EmployerService {
 	
 	List<Employer> getAll();
 	
-	Result add(String mail,String password,
-		    String repeatPassword,String companyName,
-		    String webAdress,String phone);
+	Result add(Employer newEmployer);
 
 }

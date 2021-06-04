@@ -13,6 +13,7 @@ import com.hrms.hrms.business.abstracts.TechnologyService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Technology;
+import com.hrms.hrms.entities.dtos.TechnologyAddDto;
 
 @RestController
 @RequestMapping("/api/technology")
@@ -31,7 +32,7 @@ public class TechnologyController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Technology newTechnology) {
-		return this.technologyService.add(newTechnology);
+	public Result add(@RequestBody TechnologyAddDto technologyAddDto) {
+		return this.technologyService.add(technologyAddDto);
 	}
 }

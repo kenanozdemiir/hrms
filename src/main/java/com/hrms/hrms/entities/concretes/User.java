@@ -21,7 +21,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
-@Inheritance(strategy = InheritanceType.JOINED)				//alt sınıflarından data çekildiğinde users sınıfındaki datalarla birlikte gelmesi için.
+@Inheritance(strategy = InheritanceType.JOINED)
+//alt sınıflarından data çekildiğinde users sınıfındaki datalarla birlikte gelmesi için.
 
 public class User {
 	

@@ -13,6 +13,7 @@ import com.hrms.hrms.business.abstracts.EducationService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Education;
+import com.hrms.hrms.entities.dtos.EducationAddDto;
 
 @RestController
 @RequestMapping("/api/education")
@@ -31,8 +32,8 @@ public class EducationController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Education newEducation) {
-		return this.educationService.add(newEducation);
+	public Result add(@RequestBody EducationAddDto educationAddDto) {
+		return this.educationService.add(educationAddDto);
 		
 	}
 	

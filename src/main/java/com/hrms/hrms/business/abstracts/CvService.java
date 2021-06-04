@@ -5,8 +5,9 @@ import java.util.List;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Cv;
+import com.hrms.hrms.entities.dtos.CvAddDto;
 
 public interface CvService {
-	Result add(Cv cv);
+	public Result add(CvAddDto newCvAddDto);
 	DataResult<List<Cv>> getAll();
 }

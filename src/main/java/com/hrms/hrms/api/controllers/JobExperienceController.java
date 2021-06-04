@@ -13,6 +13,7 @@ import com.hrms.hrms.business.abstracts.JobExperienceService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.JobExperience;
+import com.hrms.hrms.entities.dtos.JobExperienceAddDto;
 
 @RestController
 @RequestMapping("/api/jobexperience")
@@ -32,8 +33,8 @@ public class JobExperienceController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobExperience newJobExperience) {
-		return this.jobExperienceService.add(newJobExperience);
+	public Result add(@RequestBody JobExperienceAddDto newJobExperienceAddDto) {
+		return this.jobExperienceService.add(newJobExperienceAddDto);
 		
 	}
 	

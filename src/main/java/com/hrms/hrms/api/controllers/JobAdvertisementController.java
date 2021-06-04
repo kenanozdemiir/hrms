@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hrms.hrms.business.abstracts.JobAdvertisementService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.entities.concretes.JobAdvertisement;
+import com.hrms.hrms.entities.dtos.JobAdvertisementsAddDto;
 import com.hrms.hrms.entities.dtos.JobAdvertisementsDto;
 
 @RestController
@@ -32,8 +32,8 @@ public class JobAdvertisementController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobAdvertisement newJobAdvertisement) {
-		return jobAdvertisementService.add(newJobAdvertisement);
+	public Result add(@RequestBody  JobAdvertisementsAddDto newJobAdvertisementsAddDto) {
+		return jobAdvertisementService.add(newJobAdvertisementsAddDto);
 	}
 	
 	@GetMapping("/findAllByOrderByStartingDateAsc")

@@ -13,6 +13,7 @@ import com.hrms.hrms.business.abstracts.LanguageService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Language;
+import com.hrms.hrms.entities.dtos.LanguageAddDto;
 
 @RestController
 @RequestMapping("/api/language")
@@ -32,8 +33,8 @@ public class LanguageController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Language newLanguage) {
-		return this.languageService.add(newLanguage);
+	public Result add(@RequestBody LanguageAddDto languageAddDto) {
+		return this.languageService.add(languageAddDto);
 	}
 	
 }

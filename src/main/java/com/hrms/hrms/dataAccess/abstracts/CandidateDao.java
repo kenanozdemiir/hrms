@@ -14,6 +14,6 @@ public interface CandidateDao extends JpaRepository<Candidate, Integer  > {
 	boolean existsByMail(String mail);
 	
 	@Query("Select new com.hrms.hrms.entities.dtos.CandidateCvDto(c.name,c.surname,cv)"
-			+ " From Candidate c Inner Join c.cvs cv where cv.id=:id")
+			+ " From Candidate c Inner Join c.cv cv where c.id=:id")
 	CandidateCvDto getCandidateCvAllById(int id);
 }

@@ -48,9 +48,7 @@ public class CandidateManager implements CandidateService{
 	}
 
 	@Override
-	public Result add(Candidate newCandidate){
-		if(candidateCheckHelper.isCandidateEmpty(newCandidate))
-			return new ErrorResult("Tüm alanları doldurunuz.");		
+	public Result add(Candidate newCandidate){		
 		if(candidateCheckHelper.isPasswordSame(newCandidate)==false)
 			return new ErrorResult("Şifreler aynı olmalıdır.");
 		if(mernisService.confirm(newCandidate.getNationalIdentity(), newCandidate.getName(), newCandidate.getSurname(), newCandidate.getBirthYear())==false)

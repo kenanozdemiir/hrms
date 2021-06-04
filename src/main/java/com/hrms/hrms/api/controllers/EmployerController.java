@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.hrms.business.abstracts.EmployerService;
@@ -33,14 +33,9 @@ public class EmployerController {
 	
 	@PostMapping("/add")
 	
-	public Result add(@RequestParam (name="Mail") String mail,
-			@RequestParam(name="Şifre") String password,
-			@RequestParam(name="Şifre tekrarı") String repeatPassword,
-			@RequestParam(name="Şirket Adı") String companyName,
-			@RequestParam(name="Web Adresi") String webAdress,
-			@RequestParam(name="Telefon numarası") String phone) {
+	public Result add(@RequestBody Employer newEmployer) {
 		
-		return employerService.add(mail,password,repeatPassword,companyName,webAdress,phone);
+		return employerService.add(newEmployer);
 		
 	}
 	

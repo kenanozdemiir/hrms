@@ -13,6 +13,7 @@ import com.hrms.hrms.business.abstracts.CvService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Cv;
+import com.hrms.hrms.entities.dtos.CvAddDto;
 
 @RestController
 @RequestMapping("/api/cvs")
@@ -31,7 +32,7 @@ public class CvController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Cv newCv) {
-		return this.cvService.add(newCv);
+	public Result add(@RequestBody CvAddDto newCvAddDto) {
+		return this.cvService.add(newCvAddDto);
 	}
 }
