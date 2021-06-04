@@ -9,6 +9,6 @@ import com.hrms.hrms.entities.dtos.EducationAddDto;
 
 public interface EducationService {
 	Result add(EducationAddDto educationAddDto);
-	DataResult<List<Education>> getAll();
+	DataResult<List<EducationAddDto>> getAll();
 	List<Education> findAllByOrderByEndDateDesc();
 }

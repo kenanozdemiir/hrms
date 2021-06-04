@@ -1,11 +1,10 @@
 package com.hrms.hrms.business.concretes;
 
 import java.util.List;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hrms.hrms.business.abstracts.EducationService;
+import com.hrms.hrms.core.dtoConverter.ConvertService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
@@ -17,32 +16,24 @@ import com.hrms.hrms.entities.dtos.EducationAddDto;
 public class EducationManager implements EducationService {
 	
 	private EducationDao educationDao;
-	private ModelMapper modelMapper;
+	private ConvertService convertService;
 	
 	@Autowired
-	public EducationManager(EducationDao educationDao,ModelMapper modelMapper) {
+	public EducationManager(EducationDao educationDao,ConvertService convertService) {
 		super();
 		this.educationDao = educationDao;
-		this.modelMapper = modelMapper;
+		this.convertService = convertService;
 	}
-	
-	private Education dtoClassConverter (EducationAddDto educationAddDto){
-		
-		Education education = modelMapper.map(educationAddDto, Education.class);
-		educationAddDto.setCvId(education.getCv().getId());
-		educationAddDto.setGraduateId(education.getId());
-		
-		return education;
-	}
+
 
 	@Override
 	public Result add(EducationAddDto educationAddDto) {
-		return new SuccessDataResult<Education>(educationDao.save(this.dtoClassConverter(educationAddDto)), "Başarıyla eklendi.");
+		return new SuccessDataResult<Education>(this.educationDao.save((Education)convertService.dtoClassConverter(educationAddDto, Education.class)), "Başarıyla eklendi.");
 	}
 
 	@Override
-	public DataResult<List<Education>> getAll() {
-		return new SuccessDataResult<List<Education>>(educationDao.findAll(), "Başarıyla listelendi.");
+	public DataResult<List<EducationAddDto>> getAll() {
+		return new SuccessDataResult<List<EducationAddDto>>(this.convertService.dtoConverter(this.educationDao.findAll(), EducationAddDto.class), "Başarıyla listelendi.");
 	}
 
 	@Override

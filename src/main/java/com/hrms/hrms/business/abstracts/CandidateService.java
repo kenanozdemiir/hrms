@@ -14,4 +14,6 @@ public interface CandidateService {
 	Result add(Candidate newCandidate) ;
 	
 	CandidateCvDto getCandidateCvAllById(int id);
+	
+	
 }

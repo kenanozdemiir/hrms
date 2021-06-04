@@ -2,10 +2,8 @@ package com.hrms.hrms.business.concretes;
 
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hrms.hrms.business.abstracts.CandidateService;
 import com.hrms.hrms.business.abstracts.VerificationCodeService;
 import com.hrms.hrms.core.abstracts.CandidateCheckHelper;
@@ -68,6 +66,8 @@ public class CandidateManager implements CandidateService{
 	public CandidateCvDto getCandidateCvAllById(int id){
 		return this.candidateDao.getCandidateCvAllById(id);
 	}
+
+
 
 	
 	

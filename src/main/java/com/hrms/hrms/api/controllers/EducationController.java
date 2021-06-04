@@ -27,7 +27,7 @@ public class EducationController {
 	}
 	
 	@GetMapping("/getAll")
-	public DataResult<List<Education>> getAll(){
+	public DataResult<List<EducationAddDto>> getAll(){
 		return educationService.getAll();
 	}
 	
