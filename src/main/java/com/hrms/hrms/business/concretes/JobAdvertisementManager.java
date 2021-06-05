@@ -1,13 +1,11 @@
 package com.hrms.hrms.business.concretes;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.modelmapper.ModelMapper;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hrms.hrms.business.abstracts.JobAdvertisementService;
+import com.hrms.hrms.core.dtoConverter.ConvertService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
@@ -23,57 +21,37 @@ import com.hrms.hrms.entities.dtos.JobAdvertisementsDto;
 public class JobAdvertisementManager implements JobAdvertisementService{
 	
 	private JobAdvertisementDao jobAdvertisementDao;
-	private ModelMapper modelMapper;
+	private ConvertService convertService;
 	
 	@Autowired
-	public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao,ModelMapper modelMapper) {
+	public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao,ConvertService convertService) {
 		this.jobAdvertisementDao = jobAdvertisementDao;	
-		this.modelMapper = modelMapper;
+		this.convertService = convertService;
 	}
 
-	private List<JobAdvertisementsDto> dtoListConverter (List<JobAdvertisement> jobAdvertisement){
-		List<JobAdvertisementsDto> jobAdDto = new ArrayList<JobAdvertisementsDto>();
-		jobAdvertisement.forEach(x -> {
-			JobAdvertisementsDto dto = modelMapper.map(x, JobAdvertisementsDto.class);
-			dto.setCompanyName(x.getEmployer().getCompanyName());
-			dto.setJobPosition(x.getJobPosition().getPosition());
-			jobAdDto.add(dto);
-		});
-		return jobAdDto;
-	}
 	
-	private JobAdvertisement dtoClassConverter (JobAdvertisementsAddDto jobAdvertisementsAddDto){
-		
-		JobAdvertisement jobAd = modelMapper.map(jobAdvertisementsAddDto, JobAdvertisement.class);
-		jobAdvertisementsAddDto.setEmployerId(jobAd.getEmployer().getId());
-		jobAdvertisementsAddDto.setJobPositionId(jobAd.getJobPosition().getId());
-		jobAdvertisementsAddDto.setCityId(jobAd.getCity().getId());
-		
-		
-		return jobAd;
-	}
 	
 	
 	
 	
 	@Override
 	public List<JobAdvertisementsDto> getAll() {
-		return this.dtoListConverter(this.jobAdvertisementDao.findByStatus(true));
+		return this.convertService.dtoConverter(this.jobAdvertisementDao.findByStatus(true),JobAdvertisementsDto.class);
 	}
 
 	@Override
 	public Result add(JobAdvertisementsAddDto newJobAdvertisementsAddDto) {	
-		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.save(this.dtoClassConverter(newJobAdvertisementsAddDto)), "Başarıyla kaydedildi.");
+		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.save((JobAdvertisement)convertService.dtoClassConverter(newJobAdvertisementsAddDto,JobAdvertisement.class)), "Başarıyla kaydedildi.");
 	}
 
 	@Override
 	public DataResult<List<JobAdvertisementsDto>> findAllByOrderByStartingDateAsc() {
-		return new SuccessDataResult<List<JobAdvertisementsDto>>(this.dtoListConverter(this.jobAdvertisementDao.findByStatusOrderByStartingDateAsc(true)),"Tarihe göre artan şekilde sıralandı.") ;	
+		return new SuccessDataResult<List<JobAdvertisementsDto>>(this.convertService.dtoConverter(this.jobAdvertisementDao.findByStatusOrderByStartingDateAsc(true),JobAdvertisementsDto.class),"Tarihe göre artan şekilde sıralandı.") ;	
 	}
 
 	@Override
 	public List<JobAdvertisementsDto> getByCompanyName(String companyName) {
-		return this.dtoListConverter(this.jobAdvertisementDao.findByStatusAndEmployer_CompanyName(true, companyName));
+		return this.convertService.dtoConverter(this.jobAdvertisementDao.findByStatusAndEmployer_CompanyName(true, companyName),JobAdvertisementsDto.class);
 	}
 
 	@Override

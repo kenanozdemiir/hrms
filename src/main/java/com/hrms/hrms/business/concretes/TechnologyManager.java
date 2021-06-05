@@ -1,12 +1,10 @@
 package com.hrms.hrms.business.concretes;
 
 import java.util.List;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hrms.hrms.business.abstracts.TechnologyService;
+import com.hrms.hrms.core.dtoConverter.ConvertService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
@@ -18,34 +16,26 @@ import com.hrms.hrms.entities.dtos.TechnologyAddDto;
 public class TechnologyManager implements TechnologyService{
 
 	private TechnologyDao technologyDao;
-	private ModelMapper modelMapper;
+	private ConvertService convertService;
 
 	@Autowired
-	public TechnologyManager(TechnologyDao technologyDao,ModelMapper modelMapper) {
+	public TechnologyManager(TechnologyDao technologyDao,ConvertService convertService) {
 		super();
 		this.technologyDao = technologyDao;
-		this.modelMapper = modelMapper;
+		this.convertService = convertService;
+	
 	}
 	
-	private Technology dtoClassConverter (TechnologyAddDto technologyAddDto){
-		
-		Technology technology = modelMapper.map(technologyAddDto, Technology.class);
-		technologyAddDto.setCvId(technology.getCv().getId());
-		
-		
-		
-		return technology;
-	}
 	
 	@Override
 	public Result add(TechnologyAddDto technologyAddDto) {
 		
-		return new SuccessDataResult<Technology>(this.technologyDao.save(this.dtoClassConverter(technologyAddDto)), "Başarıyla eklendi.");
+		return new SuccessDataResult<Technology>(this.technologyDao.save((Technology)this.convertService.dtoClassConverter(technologyAddDto, Technology.class)), "Başarıyla eklendi.");
 	}
 	
 	@Override
-	public DataResult<List<Technology>> getAll(){
-		return new SuccessDataResult<List<Technology>>(this.technologyDao.findAll(), "Cv'ler başarıyla listelendi.");
+	public DataResult<List<TechnologyAddDto>> getAll(){
+		return new SuccessDataResult<List<TechnologyAddDto>>(this.convertService.dtoConverter(this.technologyDao.findAll(), TechnologyAddDto.class), "Cv'ler başarıyla listelendi.");
 	}
 	
 }

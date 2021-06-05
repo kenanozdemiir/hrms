@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JobAdvertisementsDto {
 	
-	private String companyName;
-	private String jobPosition;
+	private String EmployerCompanyName;
+	private String jobPositionPosition;
 	private int quato;
 	private LocalDateTime startingDate;
 	private LocalDateTime endDate;

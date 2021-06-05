@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.hrms.business.abstracts.JobExperienceService;
+import com.hrms.hrms.core.dtoConverter.ConvertService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
@@ -17,31 +18,24 @@ import com.hrms.hrms.entities.dtos.JobExperienceAddDto;
 @Service
 public class JobExperienceManager implements JobExperienceService{
 	private JobExperienceDao jobExperienceDao;
-	private ModelMapper modelMapper;
+	private ConvertService convertService;
 	@Autowired
-	public JobExperienceManager(JobExperienceDao jobExperienceDao,ModelMapper modelMapper) {
+	public JobExperienceManager(JobExperienceDao jobExperienceDao,ModelMapper modelMapper,ConvertService convertService) {
 		super();
 		this.jobExperienceDao = jobExperienceDao;
-		this.modelMapper = modelMapper;
+		this.convertService=convertService;
 	}
 	
-private JobExperience dtoClassConverter (JobExperienceAddDto jobExperienceAddDto){
-		
-		JobExperience jobExperience = modelMapper.map(jobExperienceAddDto, JobExperience.class);
-		jobExperienceAddDto.setCvId(jobExperience.getCv().getId());
-		jobExperienceAddDto.setJobPositionId(jobExperience.getJobPosition().getId());
-		
-		return jobExperience;
-	}
+
 
 	@Override
 	public Result add(JobExperienceAddDto newJobExperienceAddDto) {
-		return new SuccessDataResult<JobExperience>(jobExperienceDao.save(this.dtoClassConverter(newJobExperienceAddDto)), "Başarıyla eklendi.");
+		return new SuccessDataResult<JobExperience>(jobExperienceDao.save((JobExperience)this.convertService.dtoClassConverter(newJobExperienceAddDto,JobExperience.class)), "Başarıyla eklendi.");
 	}
 
 	@Override
 	public DataResult<List<JobExperience>> getAll() {
-		return new SuccessDataResult<List<JobExperience>>(jobExperienceDao.findAll(), "Başarıyla listelendi.");
+		return new SuccessDataResult<List<JobExperience>>(this.convertService.dtoConverter(this.jobExperienceDao.findAll(), JobExperience.class), "Başarıyla listelendi.");
 	}
 
 	@Override

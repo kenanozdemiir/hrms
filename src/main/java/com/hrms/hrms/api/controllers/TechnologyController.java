@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hrms.hrms.business.abstracts.TechnologyService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.entities.concretes.Technology;
 import com.hrms.hrms.entities.dtos.TechnologyAddDto;
 
 @RestController
@@ -27,7 +26,7 @@ public class TechnologyController {
 	}
 	
 	@GetMapping("/getAll")
-	public DataResult<List<Technology>> getAll() {
+	public DataResult<List<TechnologyAddDto>> getAll() {
 		return this.technologyService.getAll();
 	}
 	
