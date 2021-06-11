@@ -3,6 +3,7 @@ package com.hrms.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ import com.hrms.hrms.entities.dtos.CvAddDto;
 
 @RestController
 @RequestMapping("/api/cvs")
+@CrossOrigin
 public class CvController {
 	private CvService cvService;
 	

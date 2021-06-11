@@ -8,8 +8,10 @@ import com.hrms.hrms.business.abstracts.CandidateService;
 import com.hrms.hrms.business.abstracts.VerificationCodeService;
 import com.hrms.hrms.core.abstracts.CandidateCheckHelper;
 import com.hrms.hrms.core.abstracts.MernisService;
+import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
+import com.hrms.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.CandidateDao;
 import com.hrms.hrms.dataAccess.abstracts.CvDao;
@@ -39,9 +41,9 @@ public class CandidateManager implements CandidateService{
 	}
 	
 	@Override
-	public List<Candidate> getAll(){
+	public DataResult<List<Candidate>> getAll(){
 		
-		return candidateDao.findAll();
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(), "İş arayanlar listelendi:");
 		
 	}
 

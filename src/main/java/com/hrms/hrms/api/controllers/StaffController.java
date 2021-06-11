@@ -3,6 +3,7 @@ package com.hrms.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.hrms.hrms.entities.concretes.Staff;
 
 @RestController
 @RequestMapping("/api/staff")
+@CrossOrigin
 
 public class StaffController {
 	

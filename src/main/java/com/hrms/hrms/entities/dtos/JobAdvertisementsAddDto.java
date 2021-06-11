@@ -18,6 +18,8 @@ public class JobAdvertisementsAddDto {
 	private int employerId;
 	private int jobPositionId;
 	private int cityId;
+	private int typeOfWorkId;
+	private int workTimeId;
 	private int quato;
 	private int minSalary;
 	private int maxSalary;

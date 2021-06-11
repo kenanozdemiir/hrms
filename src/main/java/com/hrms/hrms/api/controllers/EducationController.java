@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.hrms.business.abstracts.EducationService;
@@ -38,8 +39,8 @@ public class EducationController {
 	}
 	
 	@GetMapping("findAllByOrderByEndDateDesc")
-	public List<Education> findAllByOrderByEndDateDesc(){
-		return this.educationService.findAllByOrderByEndDateDesc();
+	public List<Education> findAllByOrderByEndDateDesc(@RequestParam int id){
+		return this.educationService.findAllBycvIdOrderByEndDateDesc(id);
 	}
 	
 	

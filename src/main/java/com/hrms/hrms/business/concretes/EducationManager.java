@@ -37,8 +37,8 @@ public class EducationManager implements EducationService {
 	}
 
 	@Override
-	public List<Education> findAllByOrderByEndDateDesc() {
-		return this.educationDao.findAllByOrderByEndDateDesc();
+	public List<Education> findAllBycvIdOrderByEndDateDesc(int id) {
+		return this.educationDao.findAllBycvIdOrderByEndDateDesc(id);
 	}
 
 }

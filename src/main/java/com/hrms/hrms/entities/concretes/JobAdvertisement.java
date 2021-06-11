@@ -59,6 +59,17 @@ public class JobAdvertisement {
 	@Column(name="status")
 	private boolean status;
 	
+	@Column(name="is_verified")
+	private boolean isVerified;
+	
+	@ManyToOne
+	@JoinColumn(name="type_of_work_id")
+	private TypeOfWork typeOfWork;
+	
+	@ManyToOne
+	@JoinColumn(name="work_time_id")
+	private WorkTime workTime;
+	
 	@ManyToOne()
 	@JoinColumn(name="employer_id")
 	private Employer employer;

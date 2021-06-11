@@ -29,7 +29,7 @@ public class Employer extends User {
 	private String companyName;
 	
 	@Column(name = "web_adress")
-	private String web_adress;
+	private String webAdress;
 	
 	@Column(name = "phone")
 	private String phone;
