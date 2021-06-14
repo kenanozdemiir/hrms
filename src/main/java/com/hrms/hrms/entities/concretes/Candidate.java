@@ -35,7 +35,7 @@ public class Candidate extends User {
 	@Column(name = "birth_year")
 	private String birthYear;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy="candidate")
 	private List<Cv> cv;
 }

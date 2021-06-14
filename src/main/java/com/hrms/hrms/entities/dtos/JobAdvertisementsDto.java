@@ -16,6 +16,7 @@ public class JobAdvertisementsDto {
 	private int id;
 	private String EmployerCompanyName;
 	private String jobPositionPosition;
+	private String description;
 	private int quato;
 	private LocalDateTime startingDate;
 	private LocalDateTime endDate;

@@ -44,7 +44,7 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getByCompanyName")
-	public List<JobAdvertisementsDto> getByCompanyName(@RequestParam (name="Şirket İsmi") String companyName){
+	public List<JobAdvertisementsDto> getByCompanyName(@RequestParam (name="SirketAdi") String companyName){
 		
 		return jobAdvertisementService.getByCompanyName(companyName);
 	}
